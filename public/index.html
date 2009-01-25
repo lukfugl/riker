@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Riker</title>
+    <style type="text/css" media="screen">
+      #schedule { }
+      #schedule th { background: silver; }
+      #schedule th.hourHeader { text-align: right; }
+      #schedule th.spacerHeader { }
+      #schedule th.dateHeader { }
+      #schedule td { }
+    </style>
+    <script type="text/javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/effects.js"></script>
+    <script type="text/javascript" src="javascripts/strftime.js"></script>
+    <script type="text/javascript" src="javascripts/schedule.js"></script>
+    <script type="text/javascript">
+      var schedule;
+
+      window.onload = function() {
+        schedule = new Schedule($('schedule'));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page">
+      <table id="schedule" />
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>

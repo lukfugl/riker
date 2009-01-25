@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  day: <%= Date.today %>
+  hour: 8
+  volunteer: Hans
+  notes: Getting Up
+
+two:
+  day: <%= Date.today %>
+  hour: 13
+  volunteer: Jacob
+  notes: Lunch

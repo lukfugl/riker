@@ -1,3 +1,7 @@
+## Requirements
+standard rails stuff
+haml
+
 To build the guides:
 
 * Install source-highlighter (http://www.gnu.org/software/src-highlite/source-highlight.html)

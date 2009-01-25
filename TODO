@@ -1,0 +1,5 @@
+think about how to make shifts carry over from week to week, maintaining shift
+history for the past, allowing editing of shifts in the future, without
+excessive "caching" of shifts in the future, so that if you change the current
+week shifts they can apply to the future, but don't necessarily do so (in case
+this week just has an anomaly)

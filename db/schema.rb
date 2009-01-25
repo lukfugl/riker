@@ -9,15 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090124054520) do
+ActiveRecord::Schema.define(:version => 20090125232523) do
 
   create_table "slots", :force => true do |t|
-    t.date     "day"
     t.integer  "hour"
-    t.string   "volunteer"
-    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "week"
+    t.integer  "day"
+    t.string   "layer"
+    t.string   "label"
   end
 
 end

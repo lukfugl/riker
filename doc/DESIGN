@@ -1,10 +1,14 @@
-rails? or something lighter? probably rails.
+rails
 
 model
-    shifts: week,hour
-      shift start, ending is implied by the next shift or end of day
-      if no shifts defined for the current week, use the most recent one
-    labels: date, hour, label
+    slots: week, day (of week), hour, layer, label
+
+    week is either the date of a sunday or null. in the former case, this is a
+    one-time signup. in the latter, it's a recurring signup. one-time signups
+    override recurring signups. a one-time signup with a null label indicates a
+    recurring signup is temporarily revoked (in all other cases, label must be
+    non-null, non-empty). of course, week/day-of-week/hour is the primary key.
+    when label would be null, the row is just omitted (except as noted above).
 
 view
     primary
@@ -15,5 +19,5 @@ view
         riker mug in the corner, or keep riker to the about page?
 
 controller
-    primary [week]
     ajax resources (colors and labels)
+    (primary is all static html+ajax)

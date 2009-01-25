@@ -26,32 +26,6 @@ Schedule = Class.create({
     return 8 + row;
   },
 
-  adjustAnchorDate: function(days) {
-    this.anchorDate = new Date(this.anchorDate.getTime() + 86400000 * days);
-  },
-      
-  anchorToPreviousDay: function() {
-    adjustAnchorDate(-1);
-  },
-      
-  anchorToNextDay: function() {
-    adjustAnchorDate(1);
-  },
-      
-  anchorToPreviousSunday: function() {
-    if (this.anchorDate.getDay() == 0) {
-      // on sunday, slide a full week
-      adjustAnchorDate(-7);
-    } else {
-      // slide to sunday
-      adjustAnchorDate(-1 * this.anchorDate.getDay());
-    }
-  },
-
-  anchorToNextSunday: function() {
-    adjustAnchorDate(7 - this.anchorDate.getDay());
-  },
-
   buildSpacerHeader: function() {
     var header = document.createElement("th");
     header.setAttribute("class", "spacerHeader");
@@ -108,22 +82,88 @@ Schedule = Class.create({
     }
   },
 
-  populateCell: function(date, hour) {
-    var index = this.indexCell(date, hour);
-    // fetch value from server ...
-  },
-
   populateColumn: function(date) {
-    for (var i = 0; i < 14; i++) {
-      var hour = this.hourForRow(i);
-      this.populateCell(date, hour);
-    }
+    var values = this.fetchColumnValues(date);
+    var schedule = this; // since +this+ will change inside the block
+    values.each(function(pair) {
+      var index = schedule.indexCell(date, pair.key);
+      schedule.cells[index].innerHTML = pair.value.volunteer;
+    });
   },
 
   populateTable: function() {
     for (var j = 0; j < 7; j++) {
       var date = this.dateForColumn(j);
       this.populateColumn(date);
+    }
+  },
+
+  fetchColumnValues: function(date) {
+    // TODO: fetch values from server. for now build some random values
+    var values = new Hash();
+    for (var i = 0; i < 14; i++) {
+      var hour = this.hourForRow(i);
+      values.set(hour, { volunteer: [ '', 'Hans', 'Jacob', 'Von' ][(date % hour) % 4] });
+    }
+    return values;
+  },
+
+  adjustAnchorDate: function(days) {
+    this.anchorDate = new Date(this.anchorDate.getTime() + 86400000 * days);
+  },
+      
+  anchorToPreviousDay: function() {
+    this.adjustAnchorDate(-1);
+
+    // add new date header and remove last date header
+    var row = this.table.childNodes[1];
+    row.insertBefore(this.buildDateHeader(this.anchorDate), row.childNodes[1]);
+    row.removeChild(row.lastChild);
+
+    // for each hour, add new cell and remove last cell
+    for (var i = 0; i < 14; i++) {
+      row = row.nextSibling;
+      var hour = this.hourForRow(i);
+      row.insertBefore(this.buildCell(this.anchorDate, hour), row.childNodes[1]);
+      row.removeChild(row.lastChild);
+    }
+
+    // fill the new column
+    this.populateColumn(this.anchorDate);
+  },
+      
+  anchorToNextDay: function() {
+    this.adjustAnchorDate(1);
+
+    // remove first date header and add new date header
+    var row = this.table.childNodes[1];
+    row.removeChild(row.childNodes[1]);
+    row.appendChild(this.buildDateHeader(this.dateForColumn(6)));
+
+    // for each hour, add new cell and remove last cell
+    for (var i = 0; i < 14; i++) {
+      row = row.nextSibling;
+      var hour = this.hourForRow(i);
+      row.removeChild(row.childNodes[1]);
+      row.appendChild(this.buildCell(this.dateForColumn(6), hour));
+    }
+
+    // fill the new column
+    this.populateColumn(this.dateForColumn(6));
+  },
+      
+  anchorToPreviousSunday: function() {
+    var n = this.anchorDate.getDay();
+    if (n == 0) { n = 7; }
+    for (var i = 0; i < n; i++) {
+      this.anchorToPreviousDay();
+    }
+  },
+
+  anchorToNextSunday: function() {
+    var n = 7 - this.anchorDate.getDay();
+    for (var i = 0; i < n; i++) {
+      this.anchorToNextDay();
     }
   },
 });

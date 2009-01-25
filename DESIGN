@@ -1,13 +1,17 @@
-== Stage 1
-A week grid with hour granularity. Type your name in the magically appearing
-text box and ajaxy it updates. Colored shifts like in the example.
+model
+    shifts: week,hour
+      shift start, ending is implied by the next shift or end of day
+      if no shifts defined for the current week, use the most recent one
+    labels: date, hour, label
 
-.htaccess auth so no worries about that.
+view
+    primary
+        week calendar for the current week
+        color-coded shifts (maybe just use alternating colors)
+        at least 2 layers - visitor layer (nurses, etc.) and shift layer. maybe another for things like church, nap, etc. - or maybe that's on the visitor layer.
+        discreet layer dropdown, the current layer gets the ajax editing.
+        riker mug in the corner, or keep riker to the about page?
 
-== Stage 2
-Let user (Susie) edit the shifts template (colors)
-
-== Stage 3
-optionally recurring signups? 
-users? email reminders? 
-feature creep
+controller
+    primary [week]
+    ajax resources (colors and labels)

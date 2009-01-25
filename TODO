@@ -1,13 +1,5 @@
-== Stage 1
-A week grid with hour granularity. Type your name in the magically appearing
-text box and ajaxy it updates. Colored shifts like in the example.
-
-.htaccess auth so no worries about that.
-
-== Stage 2
-Let user (Susie) edit the shifts template (colors)
-
-== Stage 3
-optionally recurring signups? 
-users? email reminders? 
-feature creep
+think about how to make shifts carry over from week to week, maintaining shift
+history for the past, allowing editing of shifts in the future, without
+excessive "caching" of shifts in the future, so that if you change the current
+week shifts they can apply to the future, but don't necessarily do so (in case
+this week just has an anomaly)

@@ -1,0 +1,13 @@
+== Stage 1
+A week grid with hour granularity. Type your name in the magically appearing
+text box and ajaxy it updates. Colored shifts like in the example.
+
+.htaccess auth so no worries about that.
+
+== Stage 2
+Let user (Susie) edit the shifts template (colors)
+
+== Stage 3
+optionally recurring signups? 
+users? email reminders? 
+feature creep

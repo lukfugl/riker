@@ -1,3 +1,5 @@
+rails? or something lighter? probably rails.
+
 model
     shifts: week,hour
       shift start, ending is implied by the next shift or end of day
@@ -7,7 +9,7 @@ model
 view
     primary
         week calendar for the current week
-        color-coded shifts (maybe just use alternating colors)
+        color-coded shifts (maybe just use zebra striping of shifts)
         at least 2 layers - visitor layer (nurses, etc.) and shift layer. maybe another for things like church, nap, etc. - or maybe that's on the visitor layer.
         discreet layer dropdown, the current layer gets the ajax editing.
         riker mug in the corner, or keep riker to the about page?

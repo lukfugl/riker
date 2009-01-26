@@ -1,3 +1,8 @@
+var Layers = $H({
+  volunteer: 'Volunteers',
+  notes: 'Notes',
+});
+
 Schedule = Class.create({
   initialize: function(table) {
     today = new Date();
@@ -10,7 +15,7 @@ Schedule = Class.create({
 
     this.table.hide();
     this.buildTable();
-    this.populateTable();
+    this.selectLayer('volunteer');
     this.table.show();
   },
 
@@ -26,9 +31,21 @@ Schedule = Class.create({
     return 8 + row;
   },
 
-  buildSpacerHeader: function() {
+  buildLayerHeader: function() {
     var header = document.createElement("th");
-    header.setAttribute("class", "spacerHeader");
+    header.setAttribute("class", "layerHeader");
+    var select = document.createElement("select");
+    Layers.each(function(pair) {
+      var option = document.createElement("option");
+      option.setAttribute("value", pair.key);
+      option.innerHTML = pair.value;
+      select.appendChild(option);
+    });
+    var schedule = this; // since +this+ will change in the onchange method
+    select.onchange = function() {
+      schedule.selectLayer(this.value);
+    };
+    header.appendChild(select);
     return header;
   },
 
@@ -41,7 +58,7 @@ Schedule = Class.create({
 
   buildDateHeaderRow: function() {
     var row = document.createElement("tr");
-    row.appendChild(this.buildSpacerHeader());
+    row.appendChild(this.buildLayerHeader());
     for (var i = 0; i < 7; i++) {
       var date = this.dateForColumn(i);
       row.appendChild(this.buildDateHeader(date));
@@ -82,12 +99,17 @@ Schedule = Class.create({
     }
   },
 
+  selectLayer: function(layer) {
+    this.layer = layer;
+    this.populateTable();
+  },
+
   populateColumn: function(date) {
     var values = this.fetchColumnValues(date);
     var schedule = this; // since +this+ will change inside the block
     values.each(function(pair) {
       var index = schedule.indexCell(date, pair.key);
-      schedule.cells[index].innerHTML = pair.value.volunteer;
+      schedule.cells[index].innerHTML = pair.value[schedule.layer] || "";
     });
   },
 
@@ -103,7 +125,11 @@ Schedule = Class.create({
     var values = new Hash();
     for (var i = 0; i < 14; i++) {
       var hour = this.hourForRow(i);
-      values.set(hour, { volunteer: [ '', 'Hans', 'Jacob', 'Von' ][(date % hour) % 4] });
+      var n = date % hour;
+      var labels = {};
+      if (n % 4 > 0) { labels.volunteer = [ 'Hans', 'Jacob', 'Von' ][n % 4 - 1]; }
+      if (n % 3 > 0) { labels.notes = n; }
+      values.set(hour, labels);
     }
     return values;
   },

@@ -27,6 +27,10 @@
   <body>
     <img style="float:right" src="/images/surprised.jpg" title="wow!" />
     <div id="page">
+      <a href="#" onclick="schedule.anchorToPreviousSunday(); return false">&laquo; Previous Week</a>
+      <a href="#" onclick="schedule.anchorToPreviousDay(); return false">&lt; Previous Day</a>
+      <a href="#" onclick="schedule.anchorToNextDay(); return false">&gt; Next Day</a>
+      <a href="#" onclick="schedule.anchorToNextSunday(); return false">&raquo; Next Week</a>
       <table id="schedule" />
       <div id="footer">&nbsp;</div>
     </div>

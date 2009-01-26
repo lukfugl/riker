@@ -1,14 +1,8 @@
-rails
+sinatra!
 
 model
-    slots: week, day (of week), hour, layer, label
-
-    week is either the date of a sunday or null. in the former case, this is a
-    one-time signup. in the latter, it's a recurring signup. one-time signups
-    override recurring signups. a one-time signup with a null label indicates a
-    recurring signup is temporarily revoked (in all other cases, label must be
-    non-null, non-empty). of course, week/day-of-week/hour is the primary key.
-    when label would be null, the row is just omitted (except as noted above).
+    slots: date, hour, layer, label
+    (ignoring recurring for now)
 
 view
     primary
@@ -21,3 +15,12 @@ view
 controller
     ajax resources (colors and labels)
     (primary is all static html+ajax)
+
+resources
+    GET /YYYY/MM/DD/HH/layer -- returns label text for slot+layer
+    GET /YYYY/MM/DD/HH -- returns yaml/json hash of layer:label
+    GET /YYYY/MM/DD/layer -- returns yaml/json list of labels for the slots+layer
+    GET /YYYY/MM/DD -- returns yaml/json list of hashes of layer:label
+    PUT /YYYY/MM/DD/HH/layer -- sets label text for slot+layer (one-time)
+    POST /YYYY/MM/DD/HH/layer -- equivalent to PUT
+    DELETE /YYYY/MM/DD/HH/layer -- equivalent to PUT/POST with ""

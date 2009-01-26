@@ -1,0 +1,7 @@
+
+      #schedule { }
+      #schedule th { background: silver; }
+      #schedule th.hourHeader { text-align: right; }
+      #schedule th.layerHeader { }
+      #schedule th.dateHeader { }
+      #schedule td { }

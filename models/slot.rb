@@ -1,3 +1,5 @@
+require 'active_record'
+
 class Slot < ActiveRecord::Base
   def self.[](opts={})
     day = opts[:day]
@@ -28,12 +30,13 @@ class Slot < ActiveRecord::Base
   before_update :prevent_blanks
 
   def prevent_blanks
-    if label.empty?
-      if !new_record?
-        destroy?
-      end
-      return false
-    end
+    return false if new_record? and label.empty?
+    destroy if label.empty?
     return true
   end
 end
+
+ActiveRecord::Base.establish_connection(
+  :adapter => 'sqlite3',
+  :database => 'db/development.sqlite3'
+)

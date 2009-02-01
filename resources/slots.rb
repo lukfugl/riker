@@ -1,25 +1,27 @@
 require 'models/slot'
 
-def load_slots(params)
-  return unless params[:YYYY] =~ /^\d{4}$/
-  return unless params[:MM] =~ /^\d{2}$/
-  return unless params[:DD] =~ /^\d{2}$/
-  day = Date.parse("#{params[:YYYY]}-#{params[:MM]}-#{params[:DD]}")
+helpers do
+  def load_slots(params)
+    return unless params[:YYYY] =~ /^\d{4}$/
+    return unless params[:MM] =~ /^\d{2}$/
+    return unless params[:DD] =~ /^\d{2}$/
+    day = Date.parse("#{params[:YYYY]}-#{params[:MM]}-#{params[:DD]}")
 
-  if params[:HH]
-    return unless params[:HH] =~ /^\d{2}$/
-    hour = params[:HH].to_i
-  else
-    hour = nil
+    if params[:HH]
+      return unless params[:HH] =~ /^\d{2}$/
+      hour = params[:HH].to_i
+    else
+      hour = nil
+    end
+
+    if params[:layer]
+      layer = params[:layer]
+    else
+      layer = nil
+    end
+
+    Slot[:day => day, :hour => hour, :layer => layer]
   end
-
-  if params[:layer]
-    layer = params[:layer]
-  else
-    layer = nil
-  end
-
-  Slot[:day => day, :hour => hour, :layer => layer]
 end
 
 get '/:YYYY/:MM/:DD/:HH/:layer' do

@@ -1,17 +1,19 @@
 require 'models/slot'
 require 'date'
 
-def load_week(params)
-  return unless params[:YYYY] =~ /^\d{4}$/
-  return unless params[:MM] =~ /^\d{2}$/
-  return unless params[:DD] =~ /^\d{2}$/
+helpers do
+  def load_week(params)
+    return unless params[:YYYY] =~ /^\d{4}$/
+    return unless params[:MM] =~ /^\d{2}$/
+    return unless params[:DD] =~ /^\d{2}$/
 
-  day = Date.parse("#{params[:YYYY]}-#{params[:MM]}-#{params[:DD]}")
-  sunday = day - day.wday
-  saturday = sunday + 6
+    day = Date.parse("#{params[:YYYY]}-#{params[:MM]}-#{params[:DD]}")
+    sunday = day - day.wday
+    saturday = sunday + 6
 
-  (sunday..saturday).map do |day|
-    {:day => day, :slots => Slot[:day => day]}
+    (sunday..saturday).map do |day|
+      {:day => day, :slots => Slot[:day => day]}
+    end
   end
 end
 

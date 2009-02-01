@@ -4,12 +4,19 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/week.css"}
   %body
     %h1 Riker
+    .mug
+      %img{:src => '/images/surprised.jpg', :title => 'Commander Riker'}
     %div#date 
+      / links to go here...
+      «
       %span= sunday
       &mdash;
       %span= saturday
+      / ... and here
+      »
     %table#cal
       %tr
+        / maybe dates underneath day names would be nice?
         %th Time
         %th Sunday
         %th Monday
@@ -25,5 +32,5 @@
             - slot = day[:slots].detect{ |s| s.hour == hour }
             %td= (slot ? slot.label : '')
     %div#footer
-      date, layer dropdowns
+      date, layer dropdowns.
       %a About

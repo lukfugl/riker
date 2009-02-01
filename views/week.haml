@@ -2,6 +2,8 @@
   %head
     %title Riker
     %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/week.css"}
+    %script{:type => 'text/javascript', :src => '/javascripts/prototype.js'}
+    %script{:type => 'text/javascript', :src => '/javascripts/scriptaculous.js'}
   %body
     .mug
       %img{:src => '/images/surprised.jpg', :title => 'Commander Riker'}
@@ -30,7 +32,13 @@
             %th= hour
             - slots.each do |day|
               - slot = day[:slots].detect{ |s| s.hour == hour }
-              %td= (slot ? slot.label : '')
+              %td{:id => "slot_#{day},#{hour}"}= (slot ? slot.label : '')
       #footer
         date, layer dropdowns.
         %a About
+    %script{:type => 'text/javascript'}
+      - slots.each do |day|
+        = ''
+        - hours.each do |hour|
+          - slot_url = ''
+          = "new Ajax.InPlaceEditor('slot_#{day},#{hour}', '#{slot_url}');"

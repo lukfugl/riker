@@ -4,7 +4,16 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/week.css"}
     %script{:type => 'text/javascript', :src => '/javascripts/prototype.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/scriptaculous.js'}
-    %script{:type => 'text/javascript', :src => '/javascripts/cal.js'}
+    %script{:type => 'text/javascript', :src => '/javascripts/sprintf.js'}
+    %script{:type => 'text/javascript', :src => '/javascripts/label.js'}
+    %script{:type => 'text/javascript'}
+        document.observe('dom:loaded', function() {
+        - days.each do |day|
+          - day = day[:day]
+          - hours.each do |hour|
+            = "Label.buildIPE('#{day}', '#{hour}');"
+        });
+          
   %body
     .mug
       %img{:src => '/images/surprised.jpg', :title => 'Commander Riker'}
@@ -31,9 +40,14 @@
         - hours.each do |hour|
           %tr{:class => "h#{hour}"}
             %th= hour
-            - slots.each do |day|
+            - days.each do |day|
               - slot = day[:slots].detect{ |s| s.hour == hour }
-              %td{:id => "slot_#{day},#{hour}"}= (slot ? slot.label : '')
+              %td{:id => sprintf("s%sT%02d", day[:day], hour)}<
+                = (slot ? slot.label : '')
       #footer
-        date, layer dropdowns.
-        %a About
+        Edit 
+        %select#layer
+          %option{:value => 'shifts'} shifts
+          %option{:value => 'other'}  outside help, etc.
+        &middot;
+        %a{:href => '/about'} About

@@ -18,17 +18,17 @@ helpers do
 end
 
 get '/week/:YYYY/:MM/:DD' do
-  pass unless slots = load_week(params)
+  pass unless days = load_week(params)
 
-  sunday = slots.first[:day]
-  saturday = slots.last[:day]
+  sunday = days.first[:day]
+  saturday = days.last[:day]
   sunday = sunday.strftime(sunday.year == saturday.year ? '%B %d' : '%B %d, %Y')
   saturday = saturday.strftime('%B %d, %Y')
 
   haml :week, :locals => {
     :sunday => sunday,
     :saturday => saturday,
-    :slots => slots,
+    :days => days,
     :hours => (8..20)
   }
 end

@@ -20,7 +20,7 @@ class Slot < ActiveRecord::Base
     end
   end
   # Slot[:day => day] -- all slots for any layer for the day
-  # Slot[:day => day, :layer => layer] -- all slots for the given layer for the day
+  # Slot[:day => day, :layer => layer] -- all slots for the given layer, day
   # Slot[:day => day, :hour => hour] -- all slots for any layer for the day+hour
   # Slot[:day => day, :hour => hour, :layer => layer] -- slot for the given
   #   layer for the day+hour (initializes a new record if not already there)

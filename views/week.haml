@@ -4,6 +4,7 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/week.css"}
     %script{:type => 'text/javascript', :src => '/javascripts/prototype.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/scriptaculous.js'}
+    %script{:type => 'text/javascript', :src => '/javascripts/cal.js'}
   %body
     .mug
       %img{:src => '/images/surprised.jpg', :title => 'Commander Riker'}
@@ -36,9 +37,3 @@
       #footer
         date, layer dropdowns.
         %a About
-    %script{:type => 'text/javascript'}
-      - slots.each do |day|
-        = ''
-        - hours.each do |hour|
-          - slot_url = ''
-          = "new Ajax.InPlaceEditor('slot_#{day},#{hour}', '#{slot_url}');"

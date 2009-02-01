@@ -7,11 +7,15 @@ Label = {
       "/" + this.zeropad(day.getDate());
   },
 
-  buildFullUrl: function(day, hour, layer) {
+  buildHourUrl: function(day, hour) {
     var url = this.buildDayUrl(day) + "/";
     if (hour < 10) { url += "0"; }
-    url += hour + "/" + layer;
+    url += hour;
     return url;
+  },
+
+  buildFullUrl: function(day, hour, layer) {
+    return this.buildHourUrl(day, hour) + "/" + layer;
   },
 
   get: function(day, hour, layer) {

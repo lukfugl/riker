@@ -29,7 +29,7 @@
           %th Friday
           %th Saturday
         - hours.each do |hour|
-          %tr
+          %tr{:class => "h#{hour}"}
             %th= hour
             - slots.each do |day|
               - slot = day[:slots].detect{ |s| s.hour == hour }

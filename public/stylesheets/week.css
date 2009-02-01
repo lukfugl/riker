@@ -21,3 +21,9 @@
 .mug {
     float: right;
 }
+td {
+    border: thin solid;
+}
+td.a {
+    background: #aaa;
+}

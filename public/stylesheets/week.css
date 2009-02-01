@@ -1,9 +1,15 @@
+/* how to center the calendar? */
+#main {
+  text-align:center;
+  width: 800px;
+}
 #date {
   padding: 1em;
 }
 
 #cal {
   border-collapse: collapse;
+  width: 100%;
 }
 
 #cal th, td {
@@ -18,6 +24,7 @@
   padding: 1em;
 }
 
+/* float right probably isn't best, but this is just the deve pic anyway :) */
 .mug {
     float: right;
 }

@@ -1,24 +1,29 @@
-%h1 sample view
-%div#date 
-  %span= sunday
-  &mdash;
-  %span= saturday
-%table#cal
-  %tr
-    %th Time
-    %th Sunday
-    %th Monday
-    %th Tuesday
-    %th Wednesday
-    %th Thursday
-    %th Friday
-    %th Saturday
-  - hours.each do |hour|
-    %tr
-      %th.color1= hour
-      - slots.each do |day|
-        - slot = day[:slots].detect{ |s| s.hour == hour }
-        %td= (slot ? slot.label : '')
-%div.footer
-  date, layer dropdowns
-  %a About
+%html
+  %head
+    %title Riker
+    %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/week.css"}
+  %body
+    %h1 Riker
+    %div#date 
+      %span= sunday
+      &mdash;
+      %span= saturday
+    %table#cal
+      %tr
+        %th Time
+        %th Sunday
+        %th Monday
+        %th Tuesday
+        %th Wednesday
+        %th Thursday
+        %th Friday
+        %th Saturday
+      - hours.each do |hour|
+        %tr
+          %th= hour
+          - slots.each do |day|
+            - slot = day[:slots].detect{ |s| s.hour == hour }
+            %td= (slot ? slot.label : '')
+    %div#footer
+      date, layer dropdowns
+      %a About

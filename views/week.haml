@@ -33,12 +33,9 @@
           %th Saturday
         - hours.each do |hour|
           %tr{:class => "h#{hour}"}
-            %th= hour
+            %th= sprintf("%02d00", hour)
             - days.each do |day|
               - slot = day[:slots].detect{ |s| s.hour == hour }
-              /
-                = day.inspect
-                = slot.inspect
               %td
                 %div{:id => sprintf("slot_%sT%02d", day[:day], hour)}<
                   = (slot ? slot.label : '')

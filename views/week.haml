@@ -2,6 +2,11 @@
   %head
     %title Riker
     %link{:rel => "stylesheet", :type => "text/css", :href => "/stylesheets/week.css"}
+    %style{:type => 'text/css', :media => 'print'}
+      body { background: white; color: black; }
+      \#footer { display: none; }
+      \/* apparently only opera supports this */
+      @page { size: landscape; }
     %script{:type => 'text/javascript', :src => '/javascripts/prototype.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/scriptaculous.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/sprintf.js'}

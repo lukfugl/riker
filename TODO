@@ -1,6 +1,10 @@
 Is test/ cruft?
 
-maybe switch url scheme to /YYYY-MM-DD/HH and the like?
+Was it bad to nuke the rails makefile? In particular, how do we handle db
+migrations?
+
+generate a pdf or something that's able to print landscape by default. firefox
+and ie apparently have zero support for the @page thing in css.
 
 think about how to make shifts carry over from week to week, maintaining shift
 history for the past, allowing editing of shifts in the future, without

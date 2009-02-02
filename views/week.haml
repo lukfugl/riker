@@ -7,8 +7,7 @@
     %script{:type => 'text/javascript', :src => '/javascripts/sprintf.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/label.js'}
   %body
-    .mug
-      %img{:src => '/images/surprised.jpg', :title => 'Commander Riker'}
+    #spacer
     #main
       %h2#date 
         / links to go here...
@@ -47,7 +46,9 @@
             %option{:value => 'shifts'} shifts
             %option{:value => 'other'}  outside help, etc.
           &middot;
-        %a{:href => '/about'} About
+        %a{:href => '/about'} Riker?
+        &middot;
+        Written by Jacob and Hans
       %script{:type => 'text/javascript'}
         - hours.each do |hour|
           - days.each do |day|

@@ -23,6 +23,8 @@ get '/week/:YYYY-:MM-:DD' do
   sunday = days.first[:day]
   saturday = days.last[:day]
 
+  # would rather set the default charset, hrm.
+  content_type 'text/html', :charset => 'utf-8'
   haml :week, :locals => {
     :sunday => sunday,
     :saturday => saturday,

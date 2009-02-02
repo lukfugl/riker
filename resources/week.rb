@@ -35,6 +35,6 @@ end
 
 # it would be nice to make this an alias instead of a redirect, so they can
 # bookmark it. how do we do that in sinatra?
-get '/week' do
+get '/week/?' do
   redirect(Time.now.strftime("/week/%Y-%m-%d"))
 end

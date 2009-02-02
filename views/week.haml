@@ -15,11 +15,11 @@
     #spacer
     #main
       %h2#date 
-        /«
-        %span= sunday
+        %a{:href => "/week/#{sunday-7}"} «
+        %span= sunday.strftime(sunday.year == saturday.year ? '%B %d' : '%B %d, %Y')
         &mdash;
-        %span= saturday
-        /»
+        %span= saturday.strftime('%B %d, %Y')
+        %a{:href => "/week/#{saturday+1}"} »
       %table#cal
         %tr
           / maybe dates underneath day names would be nice?
@@ -43,6 +43,7 @@
                 %div{:id => sprintf("slot_%sT%02d", day[:day], hour)}<
                   = (slot ? slot.label : '')
       #footer
+        Click cells to edit &middot;
         /
           Edit 
           %select#layer

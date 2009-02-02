@@ -48,3 +48,6 @@ table {
     background: white;
     color: black;
 }
+a:link { color: #22b; }
+a:visited { color: #700; }
+a:hover { text-decoration: underline; }

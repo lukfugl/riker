@@ -22,8 +22,6 @@ get '/week/:YYYY-:MM-:DD' do
 
   sunday = days.first[:day]
   saturday = days.last[:day]
-  sunday = sunday.strftime(sunday.year == saturday.year ? '%B %d' : '%B %d, %Y')
-  saturday = saturday.strftime('%B %d, %Y')
 
   haml :week, :locals => {
     :sunday => sunday,

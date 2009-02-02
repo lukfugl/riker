@@ -51,3 +51,13 @@ table {
 a:link { color: #22b; text-decoration: none; }
 a:visited { color: #700; }
 a:hover { text-decoration: underline; }
+
+/* make the IPE look a little better */
+.inplaceeditor-form {
+  margin: 0;
+  width: 100%;
+}
+
+.inplaceeditor-form input[type=text] {
+  width: 100%;
+}

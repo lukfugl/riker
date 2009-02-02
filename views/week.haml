@@ -51,6 +51,9 @@
         &middot;
         Written by Jacob and Hans
       %script{:type => 'text/javascript'}
+        / no yellow fade, por favor
+        Ajax.InPlaceEditor.DefaultOptions.highlightEndColor = 'transparent';
+        Ajax.InPlaceEditor.DefaultOptions.highlightColor = 'transparent';
         - hours.each do |hour|
           - days.each do |day|
-            = "new Ajax.InPlaceEditor('#{sprintf("slot_%sT%02d", day[:day], hour)}', '#{sprintf("/%s/%02d/%s", day[:day], hour, 'shifts')}');"
+            = "new Ajax.InPlaceEditor('#{sprintf("slot_%sT%02d", day[:day], hour)}', '#{sprintf("/%s/%02d/%s", day[:day], hour, 'shifts')}', {okControl: false, cancelControl: false, submitOnBlur: true});"

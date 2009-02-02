@@ -6,6 +6,9 @@ migrations?
 generate a pdf or something that's able to print landscape by default. firefox
 and ie apparently have zero support for the @page thing in css.
 
+tweak the IPE styles - get rid of the funky fade out, use something other than
+funky yellow, and after edit fade to the true bg not to white.
+
 think about how to make shifts carry over from week to week, maintaining shift
 history for the past, allowing editing of shifts in the future, without
 excessive "caching" of shifts in the future, so that if you change the current

@@ -33,6 +33,9 @@
 td {
     border: thin solid;
 }
+td:hover {
+    background: #8f8;
+}
 /* not really pretty, but using IPE on td directly seems borked */
 td > div {
     min-height: 1em;

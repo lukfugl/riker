@@ -17,7 +17,7 @@ helpers do
   end
 end
 
-get '/week/:YYYY/:MM/:DD' do
+get '/week/:YYYY-:MM-:DD' do
   pass unless days = load_week(params)
 
   sunday = days.first[:day]
@@ -36,5 +36,5 @@ end
 # it would be nice to make this an alias instead of a redirect, so they can
 # bookmark it. how do we do that in sinatra?
 get '/week' do
-  redirect(Time.now.strftime("/week/%Y/%m/%d"))
+  redirect(Time.now.strftime("/week/%Y-%m-%d"))
 end

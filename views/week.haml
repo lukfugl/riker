@@ -6,14 +6,6 @@
     %script{:type => 'text/javascript', :src => '/javascripts/scriptaculous.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/sprintf.js'}
     %script{:type => 'text/javascript', :src => '/javascripts/label.js'}
-    %script{:type => 'text/javascript'}
-        document.observe('dom:loaded', function() {
-        - days.each do |day|
-          - day = day[:day]
-          - hours.each do |hour|
-            = "Label.buildIPE('#{day}', '#{hour}');"
-        });
-          
   %body
     .mug
       %img{:src => '/images/surprised.jpg', :title => 'Commander Riker'}
@@ -42,12 +34,21 @@
             %th= hour
             - days.each do |day|
               - slot = day[:slots].detect{ |s| s.hour == hour }
-              %td{:id => sprintf("s%sT%02d", day[:day], hour)}<
-                = (slot ? slot.label : '')
+              /
+                = day.inspect
+                = slot.inspect
+              %td
+                %div{:id => sprintf("slot_%sT%02d", day[:day], hour)}<
+                  = (slot ? slot.label : '')
       #footer
-        Edit 
-        %select#layer
-          %option{:value => 'shifts'} shifts
-          %option{:value => 'other'}  outside help, etc.
-        &middot;
+        /
+          Edit 
+          %select#layer
+            %option{:value => 'shifts'} shifts
+            %option{:value => 'other'}  outside help, etc.
+          &middot;
         %a{:href => '/about'} About
+      %script{:type => 'text/javascript'}
+        - hours.each do |hour|
+          - days.each do |day|
+            = "new Ajax.InPlaceEditor('#{sprintf("slot_%sT%02d", day[:day], hour)}', '#{sprintf("/%s/%02d/%s", day[:day], hour, 'shifts')}');"

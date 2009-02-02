@@ -24,35 +24,36 @@ helpers do
   end
 end
 
-get '/:YYYY/:MM/:DD/:HH/:layer' do
+get '/:YYYY-:MM-:DD/:HH/:layer' do
   pass unless slot = load_slots(params)
 
   content_type 'text/plain'
   slot.label
 end
 
-put '/:YYYY/:MM/:DD/:HH/:layer' do
+put '/:YYYY-:MM-:DD/:HH/:layer' do
   pass unless slot = load_slots(params)
 
-  slot.label = request.env["rack.input"].read
+  slot.label = request.params['value']
   slot.save
 end
 
-post '/:YYYY/:MM/:DD/:HH/:layer' do
+post '/:YYYY-:MM-:DD/:HH/:layer' do
   pass unless slot = load_slots(params)
 
-  slot.label = request.env["rack.input"].read
+  slot.label = request.params['value']
   slot.save
+  return slot.label
 end
 
-delete '/:YYYY/:MM/:DD/:HH/:layer' do
+delete '/:YYYY-:MM-:DD/:HH/:layer' do
   pass unless slot = load_slots(params)
 
   slot.label = ""
   slot.save
 end
 
-get '/:YYYY/:MM/:DD/:HH' do
+get '/:YYYY-:MM-:DD/:HH' do
   pass unless slots = load_slots(params)
 
   labels = {}
@@ -62,7 +63,7 @@ get '/:YYYY/:MM/:DD/:HH' do
   labels.to_json
 end
 
-get '/:YYYY/:MM/:DD/:layer' do
+get '/:YYYY-:MM-:DD/:layer' do
   pass unless slots = load_slots(params)
 
   labels = {}
@@ -72,7 +73,7 @@ get '/:YYYY/:MM/:DD/:layer' do
   labels.to_json
 end
 
-get '/:YYYY/:MM/:DD' do
+get '/:YYYY-:MM-:DD' do
   pass unless slots = load_slots(params)
 
   labels = {}

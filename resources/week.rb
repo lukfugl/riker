@@ -2,34 +2,50 @@ require 'models/slot'
 require 'date'
 
 helpers do
-  def load_week(params)
-    return unless params[:YYYY] =~ /^\d{4}$/
-    return unless params[:MM] =~ /^\d{2}$/
-    return unless params[:DD] =~ /^\d{2}$/
+  def parse_date(params)
+    if params[:date]
+      begin
+        @day = Date.parse(params[:date])
+      rescue ArgumentError
+        return false
+      end
+    else
+      @day = Date.today
+    end
 
-    day = Date.parse("#{params[:YYYY]}-#{params[:MM]}-#{params[:DD]}")
-    sunday = day - day.wday
-    saturday = sunday + 6
+    @sunday = @day - @day.wday
+    @saturday = @sunday + 6
 
-    (sunday..saturday).map do |day|
+    return true
+  end
+
+  def load_days
+    @days = (@sunday..@saturday).map do |day|
       {:day => day, :slots => Slot[:day => day]}
     end
   end
 end
 
-get '/week/:YYYY-:MM-:DD' do
-  pass unless days = load_week(params)
+get '/week/:date?' do
+  # load the dates and make sure we've redirected to the canonical date for the
+  # week (sunday), except in the case of no-date-provided
+  pass unless parse_date(params)
 
-  sunday = days.first[:day]
-  saturday = days.last[:day]
+  unless params[:date] && @day == @sunday
+    redirect('/week/%s' % @sunday)
+    return
+  end
 
-  # would rather set the default charset, hrm.
+  # load the labels from the database
+  load_days
+
+  # render the view; would rather set the default charset, hrm.
   content_type 'text/html', :charset => 'utf-8'
   haml :week, :locals => {
-    :sunday => sunday,
-    :saturday => saturday,
-    :days => days,
-    :hours => (8..20)
+    :sunday   => @sunday,
+    :saturday => @saturday,
+    :days     => @days,
+    :hours    => (8..20)
   }
 end
 

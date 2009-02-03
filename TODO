@@ -1,6 +1,3 @@
-generate a pdf or something that's able to print landscape by default. firefox
-and ie apparently have zero support for the @page thing in css. (Jacob)
-
 layers
 
 maybe have the td onclick initiate the proper ipe (in case they click on the

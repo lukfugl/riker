@@ -1,5 +1,6 @@
 ## Requirements
 sinatra
 haml
+prawn
 
 See doc/

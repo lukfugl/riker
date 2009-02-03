@@ -14,3 +14,8 @@ history for the past, allowing editing of shifts in the future, without
 excessive "caching" of shifts in the future, so that if you change the current
 week shifts they can apply to the future, but don't necessarily do so (in case
 this week just has an anomaly)
+
+some kind of check in every minute or so and see if the page needs to be
+reloaded would be cool. or even reload just the cells that need it. or, we
+could just set an auto-refresh of the whole page every minute or so, but
+where's the fun in that?

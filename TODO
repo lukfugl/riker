@@ -1,8 +1,5 @@
 layers
 
-maybe have the td onclick initiate the proper ipe (in case they click on the
-border, and then we could get rid of the min-height in that div css)
-
 think about how to make shifts carry over from week to week, maintaining shift
 history for the past, allowing editing of shifts in the future, without
 excessive "caching" of shifts in the future, so that if you change the current

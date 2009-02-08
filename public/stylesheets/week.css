@@ -31,7 +31,7 @@
     float: right;
 }
 td {
-    border: thin solid;
+    border: thin solid black;
 }
 td:hover {
     background: #8f8;

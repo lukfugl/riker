@@ -53,9 +53,11 @@
         &middot;
         Written by Jacob and Hans
       %script{:type => 'text/javascript'}
-        / no yellow fade, por favor
+        / no yellow fade, por favor - but IE6 (at least) chokes on 'transparent'
+        if (!Prototype.Browser.IE) {
         Ajax.InPlaceEditor.DefaultOptions.highlightEndColor = 'transparent';
         Ajax.InPlaceEditor.DefaultOptions.highlightColor = 'transparent';
+        }
         var ipes = new Hash();
         - hours.each do |hour|
           - days.each do |day|

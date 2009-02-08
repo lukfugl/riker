@@ -34,7 +34,7 @@ Label = {
   buildIPE: function(day, hour) {
     // the layer is hard-coded for now. how to dynamically change it?
     return new Ajax.InPlaceEditor(this.buildSlotID(day, hour), '', this.buildFullUrl(day, hour, 'shifts'));
-  },
+  }
 
 };
 

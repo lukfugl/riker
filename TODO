@@ -10,3 +10,9 @@ some kind of check in every minute or so and see if the page needs to be
 reloaded would be cool. or even reload just the cells that need it. or, we
 could just set an auto-refresh of the whole page every minute or so, but
 where's the fun in that?
+
+Sensible refresh. A meta refresh is bad because it can refresh when someone is
+entering something, and then what they entered is lost. (Happened to me when
+filling in this week) Maybe do a refresh, or check whether a refresh is needed,
+after an edit - or have a smart javascript refresh that waits to refresh until
+done editing...

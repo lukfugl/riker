@@ -51,7 +51,7 @@ get '/week(/:date)?' do
   }
 end
 
-get '/week/:date/pdf' do
+get '/week/:date.pdf' do
   # load the dates and make sure we've redirected to the canonical date for the
   # week (sunday), except in the case of no-date-provided
   pass unless parse_date(params)

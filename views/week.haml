@@ -33,7 +33,7 @@
           %th Saturday
         - hours.each do |hour|
           %tr{:class => "h#{hour}"}
-            %th= sprintf("%02d00", hour)
+            %th.hour= sprintf("%2d:00", (hour>12 ? hour-12 : hour))
             - days.each do |day|
               - slot = day[:slots].detect{ |s| s.hour == hour }
               %td{:id => sprintf("td_%sT%02d", day[:day], hour)}
@@ -47,11 +47,11 @@
             %option{:value => 'shifts'} shifts
             %option{:value => 'other'}  outside help, etc.
           &middot;
-        %a{:href => '/week/%s/pdf' % sunday} Download as PDF
-        &middot;
-        %a{:href => '/about'} Riker?
+        %a{:href => '/week/%s.pdf' % sunday} print-friendly
         &middot;
         Written by Jacob and Hans
+        &middot;
+        %a{:href => '/about'} Riker?
       %script{:type => 'text/javascript'}
         / no yellow fade, por favor - but IE6 (at least) chokes on 'transparent'
         if (!Prototype.Browser.IE) {

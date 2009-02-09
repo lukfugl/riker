@@ -74,3 +74,10 @@ a:hover { text-decoration: underline; }
 .inplaceeditor-form input[type=text] {
   width: 100%;
 }
+
+@media print {
+    body { background: white; color: black; }
+    #footer { display: none; }
+    /* apparently only opera supports this */
+    @page { size: landscape; }
+}

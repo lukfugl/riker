@@ -18,3 +18,8 @@ someone is entering something, and then what they entered is lost. (Happened to
 me when filling in this week) Maybe do a refresh, or check whether a refresh is
 needed, after an edit - or have a smart javascript refresh that waits to
 refresh until done editing...
+
+  my vote is for a ajax polling refresh. every timeout (minute?) it GETs some
+  API resource that returns a matrix of all the events in the given week, then
+  updates the table cells with those values. it won't cancel editing but will
+  still update the value behind the edit box

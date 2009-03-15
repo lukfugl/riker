@@ -28,7 +28,7 @@ helpers do
   end
 end
 
-get '/week(/:date)?' do
+get '/week/:date' do
   # load the dates and make sure we've redirected to the canonical date for the
   # week (sunday), except in the case of no-date-provided
   pass unless parse_date(params)
@@ -98,3 +98,8 @@ get '/week/:date.pdf' do
   doc.render
 end
 
+get %r{/week/?} do
+  d = Date.today
+  s = d - d.wday
+  redirect('/week/%s' % s)
+end

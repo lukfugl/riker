@@ -1,6 +1,10 @@
 ## Requirements
 sinatra
+sinatra-haml?
 haml
 prawn
+sqlite3-ruby
+activerecord
+(mongrel)
 
 See doc/
